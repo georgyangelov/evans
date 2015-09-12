@@ -20,7 +20,8 @@ Trane::Application.configure do
   config.action_mailer.delivery_method = :letter_opener
 
   # Set a default host that will be used in all mailers
-  config.action_mailer.default_url_options = {:host => 'trane.example.org'}
+  config.action_mailer.default_url_options     = {:host => 'trane.example.org'}
+  Rails.application.routes.default_url_options = {:host => 'trane.example.org'}
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log

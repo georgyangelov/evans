@@ -22,7 +22,8 @@ Trane::Application.configure do
   config.action_controller.allow_forgery_protection = false
 
   # Set a default host that will be used in all mailers
-  config.action_mailer.default_url_options = {:host => 'trane.example.org'}
+  config.action_mailer.default_url_options     = {:host => 'trane.example.org'}
+  Rails.application.routes.default_url_options = {:host => 'trane.example.org'}
 
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the

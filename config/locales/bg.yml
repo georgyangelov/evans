@@ -194,3 +194,10 @@ bg:
       hour: "Часа"
       minute: "Минути"
       second: "Секунди"
+  slack_bot:
+    tasks:
+      new_solution: "*%{solution_author_name}* предаде <%{url}|решение> на '%{task_name}'"
+      new_revision: "*%{solution_author_name}* обнови <%{url}|решението си> на '%{task_name}'"
+      comments:
+        task_solution: "*%{comment_author_name}* <%{url}|коменира> решението на *%{solution_author_name}* на '%{task_name}'"
+        own_task_solution: "*%{comment_author_name}* <%{url}|коменира> решението си на '%{task_name}'"

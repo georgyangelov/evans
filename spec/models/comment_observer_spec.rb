@@ -25,4 +25,26 @@ describe CommentObserver do
 
     comment.save!
   end
+
+  context 'with disabled Slack integration' do
+    around do |example|
+      Rails.application.config.slack_bot_enabled = false
+      example.run
+      Rails.application.config.slack_bot_enabled = true
+    end
+
+    it 'does not call the notification worker' do
+      expect(SlackCommentNotificationWorker).to_not receive(:perform_async)
+
+      create :comment
+    end
+  end
+
+  context 'with enabled Slack integration' do
+    it "posts a message on Slack" do
+      expect(SlackCommentNotificationWorker).to receive(:perform_async).with(42)
+
+      create :comment, id: 42
+    end
+  end
 end

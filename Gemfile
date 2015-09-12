@@ -31,6 +31,8 @@ gem 'sidekiq', '< 3'
 gem 'slim'
 gem 'sinatra', require: false
 
+gem 'slack-ruby-client'
+
 group :production do
   gem 'exception_notification'
 end

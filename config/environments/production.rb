@@ -69,8 +69,9 @@ Trane::Application.configure do
   config.action_mailer.delivery_method = :smtp
 
   # Set a default host that will be used in all mailers
-  config.action_mailer.smtp_settings       = config.smtp_settings.symbolize_keys
-  config.action_mailer.default_url_options = {host: config.course_domain}
+  config.action_mailer.smtp_settings           = config.smtp_settings.symbolize_keys
+  config.action_mailer.default_url_options     = {host: config.course_domain}
+  Rails.application.routes.default_url_options = {host: config.course_domain}
 
   config.middleware.use ExceptionNotification::Rack, email: {
     email_prefix: '[ERROR] ',

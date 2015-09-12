@@ -113,6 +113,13 @@ GEM
       railties (>= 3.0.0)
     faker (1.5.0)
       i18n (~> 0.5)
+    faraday (0.9.1)
+      multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.10.0)
+      faraday (>= 0.7.4, < 0.10)
+    faye-websocket (0.10.0)
+      eventmachine (>= 0.12.0)
+      websocket-driver (>= 0.5.1)
     ffi (1.9.10)
     ffi-aspell (1.1.0)
       ffi
@@ -165,6 +172,7 @@ GEM
     minitest (4.7.5)
     multi_json (1.11.2)
     multi_test (0.1.2)
+    multipart-post (2.0.0)
     nenv (0.2.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -281,6 +289,11 @@ GEM
     skeptic (0.0.11)
       ffi-aspell
       trollop (>= 1.16.2)
+    slack-ruby-client (0.3.0)
+      eventmachine
+      faraday
+      faraday_middleware
+      faye-websocket
     slim (3.0.6)
       temple (~> 0.7.3)
       tilt (>= 1.3.3, < 2.1)
@@ -330,6 +343,9 @@ GEM
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
       rack-test (>= 0.5.3)
+    websocket-driver (0.6.2)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.2)
     will_paginate (3.0.7)
     xpath (2.0.0)
       nokogiri (~> 1.3)
@@ -382,6 +398,7 @@ DEPENDENCIES
   simplecov
   sinatra
   skeptic
+  slack-ruby-client
   slim
   spork-rails
   test-unit
