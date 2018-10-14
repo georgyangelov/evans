@@ -19,7 +19,7 @@ It's a pretty standard Rails application, with the exception of `site.yml`. Step
 
 1. Clone the repository
 2. Run `bundle install`
-3. Create a `config/database.yml` based on `config/database.yml.example`
+3. Create a `.env` file based on `.env.example`
 4. Create a `config/site.yml` based on `config/site.yml.example`
 5. Set up the database with `rake db:create:all db:migrate`
 6. Profit!

@@ -12,6 +12,8 @@ gem 'will_paginate'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'draper'
+gem 'execjs'
+gem 'puma'
 
 gem 'protected_attributes', '~> 1.0.0'
 gem 'rails-observers'
@@ -34,6 +36,8 @@ gem 'sidekiq', '< 3'
 gem 'slim'
 gem 'sinatra', require: false
 
+gem 'dotenv-rails'
+
 group :production do
   gem 'exception_notification'
 end
@@ -43,7 +47,6 @@ group :assets do
   gem 'sass', '~> 3.2.0'
   gem 'coffee-rails'
   gem 'uglifier'
-  gem 'therubyracer'
 end
 
 group :development, :test do

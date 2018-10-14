@@ -1,3 +1,13 @@
+/.env
+/.travis.yml
+/dump.rdb
+/doc
+/Dockerfile
+
+# Will be mounted directly in the container when run
+/config/site.yml
+
+# From .gitignore
 .bundle
 db/*.sqlite3
 db/schema.rb
@@ -27,4 +37,3 @@ tmp/homework-repo
 tmp/restart.txt
 tmp/*.sql
 tmp/rspec_output/*
-/.env

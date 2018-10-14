@@ -1,0 +1,29 @@
+development:
+  adapter: <%= ENV.fetch('EVANS_DATABASE_ADAPTER') %>
+  host: <%= ENV.fetch('EVANS_DATABASE_HOST') %>
+  encoding: unicode
+  database: <%= ENV.fetch('EVANS_DATABASE_NAME') %>
+  username: <%= ENV.fetch('EVANS_DATABASE_USERNAME') %>
+  password: <%= ENV.fetch('EVANS_DATABASE_PASSWORD') %>
+  min_messages: warning
+
+test: &test
+  adapter: <%= ENV.fetch('EVANS_DATABASE_ADAPTER') %>
+  host: <%= ENV.fetch('EVANS_DATABASE_HOST') %>
+  encoding: unicode
+  database: <%= ENV.fetch('EVANS_DATABASE_TEST_NAME', 'evans-test') %>
+  username: <%= ENV.fetch('EVANS_DATABASE_USERNAME') %>
+  password: <%= ENV.fetch('EVANS_DATABASE_PASSWORD') %>
+  min_messages: warning
+
+cucumber:
+  <<: *test
+
+production:
+  adapter: <%= ENV.fetch('EVANS_DATABASE_ADAPTER') %>
+  host: <%= ENV.fetch('EVANS_DATABASE_HOST') %>
+  encoding: unicode
+  database: <%= ENV.fetch('EVANS_DATABASE_NAME') %>
+  username: <%= ENV.fetch('EVANS_DATABASE_USERNAME') %>
+  password: <%= ENV.fetch('EVANS_DATABASE_PASSWORD') %>
+  min_messages: warning

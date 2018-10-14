@@ -9,8 +9,11 @@ Trane::Application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
+  serve_static_files = ENV.fetch('EVANS_SERVE_STATIC_FILES', 'false') != 'false'
+
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = false
+  config.serve_static_assets = serve_static_files
+  config.static_cache_control = 'public, max-age=954000'
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
@@ -27,9 +30,11 @@ Trane::Application.configure do
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 
-  # Specifies the header that your server uses for sending files
-  config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
-  # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
+  unless serve_static_files
+    # Specifies the header that your server uses for sending files
+    config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
+    # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
+  end
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -77,6 +82,9 @@ Trane::Application.configure do
     sender_address: "Exception Notifier <#{config.course_email}>",
     exception_recipients: [config.course_email]
   }
+
+  # Do not generate database dumps when migrating in production mode
+  config.active_record.dump_schema_after_migration = false
 
   # Eager load
   config.eager_load = true
