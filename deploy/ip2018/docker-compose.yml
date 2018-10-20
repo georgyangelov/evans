@@ -4,12 +4,15 @@ services:
     build:
       context: ../..
       dockerfile: deploy/ip2018/Dockerfile
+      labels:
+        maintainer: gangelov
+        description: A web app for reviewing homeworks for FMI.
     ports:
       - 3000:3000
 
     volumes:
-      - /data/evans/ip2018/uploads:/evans/public/uploads
-      - /data/evans/ip2018/site.yml:/evans/config/site.yml
+      - /home/gangelov/data/ip2018/uploads:/evans/public/uploads
+      - /home/gangelov/data/ip2018/site.yml:/evans/config/site.yml
 
     depends_on:
       redis:
@@ -20,14 +23,17 @@ services:
     restart: unless-stopped
     env_file: ip2018.env
 
+    environment:
+      VIRTUAL_HOST: up.app.astea.net
+
   sidekiq:
     build:
       context: ../..
       dockerfile: deploy/ip2018/Dockerfile
 
     volumes:
-      - /data/evans/ip2018/uploads:/evans/public/uploads
-      - /data/evans/ip2018/site.yml:/evans/config/site.yml
+      - /home/gangelov/data/ip2018/uploads:/evans/public/uploads
+      - /home/gangelov/data/ip2018/site.yml:/evans/config/site.yml
 
     depends_on:
       redis:
@@ -51,7 +57,7 @@ services:
       retries: 30
 
     volumes:
-      - /data/evans/ip2018/redis:/data
+      - /home/gangelov/data/ip2018/redis:/data
 
   postgres:
     image: postgres:9.6-alpine
@@ -69,4 +75,4 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
 
     volumes:
-      - /data/evans/ip2018/postgres:/var/lib/postgresql/data/pgdata
+      - /home/gangelov/data/ip2018/postgres:/var/lib/postgresql/data/pgdata
