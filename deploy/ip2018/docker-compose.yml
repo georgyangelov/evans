@@ -1,12 +1,9 @@
-version: '2.1'
+version: '2'
 services:
   app:
     build:
       context: ../..
       dockerfile: deploy/ip2018/Dockerfile
-      labels:
-        maintainer: gangelov
-        description: A web app for reviewing homeworks for FMI.
     ports:
       - 3000:3000
 
@@ -15,10 +12,8 @@ services:
       - /home/gangelov/data/ip2018/site.yml:/evans/config/site.yml
 
     depends_on:
-      redis:
-        condition: service_healthy
-      postgres:
-        condition: service_healthy
+      - redis
+      - postgres
 
     restart: unless-stopped
     env_file: ip2018.env
@@ -36,10 +31,8 @@ services:
       - /home/gangelov/data/ip2018/site.yml:/evans/config/site.yml
 
     depends_on:
-      redis:
-        condition: service_healthy
-      postgres:
-        condition: service_healthy
+      - redis
+      - postgres
 
     restart: unless-stopped
     env_file: ip2018.env
@@ -50,24 +43,12 @@ services:
     image: redis:4-alpine
     restart: unless-stopped
 
-    healthcheck:
-      test: ['CMD', 'redis-cli', 'ping']
-      interval: 1s
-      timeout: 3s
-      retries: 30
-
     volumes:
       - /home/gangelov/data/ip2018/redis:/data
 
   postgres:
     image: postgres:9.6-alpine
     restart: unless-stopped
-
-    healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U postgres']
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
     env_file: ip2018.env
 
