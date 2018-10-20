@@ -14,6 +14,7 @@ gem 'mini_magick'
 gem 'draper'
 gem 'execjs'
 gem 'puma'
+gem 'rubyzip'
 
 gem 'protected_attributes', '~> 1.0.0'
 gem 'rails-observers'

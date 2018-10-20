@@ -47,4 +47,12 @@ class TasksController < ApplicationController
   def guide
     render "tasks/guides/#{Language.language}"
   end
+
+  def export
+    task = Task.find params[:task_id]
+
+    zip_io = TaskExporter.new(task).to_zip_io
+
+    send_data zip_io, filename: "task-#{task.id}-solutions.zip"
+  end
 end

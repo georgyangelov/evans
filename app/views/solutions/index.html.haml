@@ -14,6 +14,8 @@
   - else
     = link_to 'Пусни тестовете', task_check_path(@task), method: :create, class: :action
 
+  = link_to 'Изтегли решенията', task_export_path(@task), class: :action
+
 %p
   %strong= @solutions.count
   решения
