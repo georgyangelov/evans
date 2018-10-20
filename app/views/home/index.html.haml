@@ -1,11 +1,12 @@
 #home-page
   %h1 Здравейте!
   %p
-    Това е сайтът на избираемия курс "#{Language.course_name}" към
+    Това е сайтът на курса "#{Language.course_name}" към
     <abbr title="Факултет по Математика и Информатика">ФМИ</abbr> София.
 
-  %h1 Новини
-  #announcements= render @announcements
+  - if Features.news_enabled?
+    %h1 Новини
+    #announcements= render @announcements
 
   - if @previous_sites.present?
     %h1 Сайтове на предишни издания на курса

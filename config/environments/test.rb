@@ -46,6 +46,9 @@ Trane::Application.configure do
   config.secret_token = '7a3a2bfc22da8bb0cdb62800d63afdff107ac85c53724d5e953d19171f89270f3da861793621c29cb2fab1d627d59d89cb08a1b69db7564a542812ad12734290'
   config.secret_key_base = '2b7037bbbcdcc81b51504033ff612333147b4cb1701b86cb0f2fe619dd048823fc607e53c391d7605eb726bd112434e06fd2985c021fdcb4aa2b5e04385f1dd11'
 
+  # Do not generate database dumps when migrating
+  config.active_record.dump_schema_after_migration = false
+
   # Eager load
   config.eager_load = false
 end

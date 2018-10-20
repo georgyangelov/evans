@@ -6,21 +6,34 @@
     %li= link_to 'Вход', new_user_session_path
     %li= link_to 'Регистрация', new_registration_path
 
-  - if user_signed_in?
+  - if Features.dashboard_enabled? and user_signed_in?
     %li= link_to 'Табло', dashboard_path
 
-  %li= link_to 'Новини', announcements_path
-  %li= link_to 'Материали', lectures_path
-  %li= link_to 'Задачи', tasks_path
-  %li= link_to 'Предизвикателства', challenges_path
+  - if Features.news_enabled?
+    %li= link_to 'Новини', announcements_path
 
-  - if Tip.current or admin?
+  - if Features.lectures_enabled?
+    %li= link_to 'Материали', lectures_path
+
+  - if Features.tasks_enabled?
+    %li= link_to 'Задачи', tasks_path
+
+  - if Features.challenges_enabled?
+    %li= link_to 'Предизвикателства', challenges_path
+
+  - if Features.tips_enabled? and (Tip.current or admin?)
     %li= link_to 'Хитринки', tips_path
 
-  %li= link_to 'Форуми', topics_path
+  - if Features.forums_enabled?
+    %li= link_to 'Форуми', topics_path
+
   %li= link_to 'Потребители', users_path
-  %li= link_to 'Класация', leaderboard_path
-  %li= link_to 'Екип', team_path
+
+  - if Features.leaderboard_enabled?
+    %li= link_to 'Класация', leaderboard_path
+
+  - if Features.team_enabled?
+    %li= link_to 'Екип', team_path
 
   - if admin?
     %li= link_to 'Активност', activities_path
