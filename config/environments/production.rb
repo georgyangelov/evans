@@ -79,8 +79,8 @@ Trane::Application.configure do
 
   config.middleware.use ExceptionNotification::Rack, email: {
     email_prefix: '[ERROR] ',
-    sender_address: "Exception Notifier <#{config.course_email}>",
-    exception_recipients: [config.course_email]
+    sender_address: Language.email_sender,
+    exception_recipients: [Language.system_email]
   }
 
   # Do not generate database dumps when migrating in production mode

@@ -23,8 +23,14 @@ module Language
     Rails.application.config.course_email
   end
 
+  def system_email
+    Rails.application.config.try(:system_email) || email
+  end
+
   def email_sender
-    "#{course_name} <#{email}>"
+    sender = Rails.application.config.try(:course_email_sender) || email
+
+    "#{course_name} <#{sender}>"
   end
 
   def domain
