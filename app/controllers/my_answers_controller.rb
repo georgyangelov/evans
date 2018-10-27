@@ -11,7 +11,7 @@ class MyAnswersController < ApplicationController
     @submission = Polls::Submission.for @poll, current_user
 
     if @submission.update params[:submission]
-      redirect_to dashboard_path, notice: 'Благодаря, че попълни анкетата.'
+      redirect_to redirect_path, notice: 'Благодаря, че попълни анкетата.'
     else
       render :show
     end

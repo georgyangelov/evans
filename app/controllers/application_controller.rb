@@ -11,11 +11,7 @@ class ApplicationController < ActionController::Base
   private
 
   def after_sign_in_path_for(something)
-    if Features.dashboard_enabled?
-      dashboard_path
-    else
-      root_path
-    end
+    redirect_path
   end
 
   def logged_in?

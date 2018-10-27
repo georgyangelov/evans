@@ -1,6 +1,8 @@
 module Features
   extend self
 
+  include Rails.application.routes.url_helpers
+
   DEFAULT_FEATURES = [
     'dashboard',
     'news',

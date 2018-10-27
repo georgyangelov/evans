@@ -1,4 +1,12 @@
 module CustomPaths
+  def redirect_path
+    if Features.dashboard_enabled?
+      dashboard_path
+    else
+      root_path
+    end
+  end
+
   def solution_path(solution)
     task_solution_path(solution.task, solution)
   end

@@ -7,7 +7,7 @@ class VoucherClaimsController < ApplicationController
   def create
     if Voucher.claim current_user, params[:code]
       flash[:notice] = 'Въведохте код успешно! Вече имате още една точка!'
-      redirect_to dashboard_path
+      redirect_to redirect_path
     else
       flash[:error] = 'Този код не съществува или вече е използван. Уверени ли сте в това, което правите?'
       redirect_to new_voucher_claim_path
