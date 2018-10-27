@@ -4,7 +4,7 @@ RUN apk add --no-cache \
     libxml2-dev \
     libxslt-dev \
     postgresql-dev \
-    graphicsmagick \
+    imagemagick \
     tzdata \
     nodejs
 
