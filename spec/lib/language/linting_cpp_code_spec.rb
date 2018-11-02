@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe 'Parsing C++ code', cpp: true do
-  it 'returns false for syntax errors' do
-    Language::Cpp.should_not be_parsing <<~CPP
+describe 'Linting C++ code', cpp: true do
+  it 'checks for syntax errors' do
+    errors = Language::Cpp.lint <<~CPP
       #include <iostream>
 
       using namespace std;
@@ -11,10 +11,12 @@ describe 'Parsing C++ code', cpp: true do
         return 0
       }
     CPP
+
+    errors.first.should include 'error: expected \';\' after return statement'
   end
 
   it 'returns true for valid code' do
-    Language::Cpp.should be_parsing <<~CPP
+    errors = Language::Cpp.lint <<~CPP
       #include <iostream>
 
       using namespace std;
@@ -24,10 +26,12 @@ describe 'Parsing C++ code', cpp: true do
         return 0;
       }
     CPP
+
+    errors.should eq []
   end
 
   it 'supports C++17' do
-    Language::Cpp.should be_parsing <<~CPP
+    errors = Language::Cpp.lint <<~CPP
       #include <tuple>
 
       int test() {
@@ -36,27 +40,33 @@ describe 'Parsing C++ code', cpp: true do
         return i;
       }
     CPP
+
+    errors.should eq []
   end
 
   it 'returns true for no code' do
-    Language::Cpp.should be_parsing ''
+    Language::Cpp.lint('').should eq []
   end
 
   it 'returns false if code contains main function definition' do
-    Language::Cpp.should_not be_parsing <<~CPP
+    errors = Language::Cpp.lint <<~CPP
       int main() {
         return 0;
       }
     CPP
+
+    errors.first.should include 'redefinition of \'main\''
   end
 
   it 'returns false for code including non-existent headers' do
-    Language::Cpp.should_not be_parsing <<~CPP
+    errors = Language::Cpp.lint <<~CPP
       #include "bla.h"
 
       int test() {
         return 0;
       }
     CPP
+
+    errors.first.should include 'fatal error: \'bla.h\' file not found'
   end
 end

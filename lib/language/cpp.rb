@@ -12,7 +12,25 @@ module Language::Cpp
   end
 
   def can_lint?
-    false
+    true
+  end
+
+  def lint(code, _additional_restrictions = {})
+    TempDir.for('code.cpp' => code) do |dir|
+      code_path = dir.join('code.cpp')
+
+      File.open code_path, 'a' do |code|
+        code.write("\n\nint main() { return 0; }")
+      end
+
+      output = `clang++ -fsyntax-only -std=c++17 #{code_path} 2>&1`
+
+      if $?.success?
+        []
+      else
+        [output]
+      end
+    end
   end
 
   def test_file_pattern
@@ -33,17 +51,8 @@ module Language::Cpp
     TEXT
   end
 
-  # TODO: Provide explanation
-  def parsing?(code)
-    TempDir.for('code.cpp' => code) do |dir|
-      code_path = dir.join('code.cpp')
-
-      File.open code_path, 'a' do |code|
-        code.write("\n\nint main() { return 0; }")
-      end
-
-      system "clang++ -fsyntax-only -std=c++17 #{code_path} > /dev/null 2>&1"
-    end
+  def parsing?(_code)
+    true
   end
 
   def run_tests(test, solution)

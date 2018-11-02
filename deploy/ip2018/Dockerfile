@@ -8,6 +8,8 @@ RUN apk add --no-cache \
     tzdata \
     nodejs
 
+# TODO: Add clang and coreutils
+
 RUN bundle config build.nokogiri --use-system-libraries
 
 WORKDIR /evans
