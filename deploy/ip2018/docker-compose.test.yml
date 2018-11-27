@@ -1,0 +1,23 @@
+version: '2'
+services:
+  app:
+    build:
+      context: ../..
+      dockerfile: deploy/ip2018/Dockerfile.test
+
+    depends_on:
+      - redis
+      - postgres
+
+    restart: unless-stopped
+    env_file: ip2018.env
+    environment:
+      RAILS_ENV: test
+      RACK_ENV: test
+
+  redis:
+    image: redis:4-alpine
+
+  postgres:
+    image: postgres:9.6-alpine
+    env_file: ip2018.env

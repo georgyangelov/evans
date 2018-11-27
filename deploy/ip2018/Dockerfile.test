@@ -15,10 +15,10 @@ RUN bundle config build.nokogiri --use-system-libraries
 WORKDIR /evans
 
 COPY Gemfile Gemfile.lock ./
-RUN bundle install --without development test
+RUN bundle install
+
+COPY config/site.yml.example config/site.yml
 
 COPY . .
 
-EXPOSE 3000
-
-CMD ["sh", "-c", "bundle exec rake db:create db:migrate db:seed assets:precompile && bundle exec puma -b tcp://0.0.0.0:3000"]
+CMD ["sh", "-c", "bundle exec rake db:create db:migrate spec:languages:cpp"]
