@@ -5,4 +5,4 @@
   #include "doctest.h"
 #endif
 
-#include "test.cpp"
+#include "tests.cpp"

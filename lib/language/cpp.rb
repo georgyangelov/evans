@@ -34,7 +34,7 @@ module Language::Cpp
   end
 
   def test_file_pattern
-    'test.cpp'
+    'tests.cpp'
   end
 
   def solution_dump(attributes)
@@ -61,7 +61,7 @@ module Language::Cpp
 
     TempDir.for(
       'solution.cpp' => solution,
-      'test.cpp'     => test,
+      'tests.cpp'    => test,
       'runner.cpp'   => runner
     ) do |dir|
       output = nil
